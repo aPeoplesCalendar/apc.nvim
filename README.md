@@ -20,7 +20,7 @@ This project is open source and the information contained in our event database 
 
 ## Install
 
-This example should Using lazy you can use this:
+**Using [lazy.nvim](https://github.com/folke/lazy.nvim/):**
 
 ```lua
 {
@@ -71,4 +71,4 @@ Opens a popup with one randomly picked event for today's date. It disappears aut
 
 - A People's Calendar is [open source](https://github.com/aPeoplesCalendar).
 - We are happy about feature requests, issue reports and code submissions
-- Commit messages must correspont to _[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)_
+- Commit messages must correspond to _[Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)_
