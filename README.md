@@ -2,7 +2,7 @@
 
 # apc.nvim
 
-[About](#about) • [Install](#install) • [Usage](#usage) • [Contribute](#contribute)
+[About](#about) • [Requirements](#requirements) • [Installation](#installation) • [Configuration](#configuration) • [Features](#features) • [Contribute](#contribute)
 
 </div>
 
@@ -18,7 +18,14 @@ This repository hosts the aPC neovim plugin, implemented in Lua.
 
 This project is open source and the information contained in our event database is non-proprietary and will _always_ be freely available for users, developers, and the public.
 
-## Install
+## Requirements
+
+- Linux or Mac operating system
+- Neovim
+- Plugin [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
+- curl
+
+## Installation
 
 **Using [lazy.nvim](https://github.com/folke/lazy.nvim/):**
 
@@ -28,16 +35,22 @@ This project is open source and the information contained in our event database 
     dependencies = {
         "rcarriga/nvim-notify",
     },
-    name = "apeoplescalendar",
+    event = "VeryLazy",
+    config = function ()
+        require("apeoplescalendar").setup() -- configuration options are described below
+    end,
 }
 ```
 
-### Requirements
+## Configuration
 
-- Linux or Mac operating system
-- Neovim
-- Plugin [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
-- curl
+**apc.nvim** comes with the following defaults:
+
+```lua
+{
+    auto_teaser_filetypes = { "dashboard", "alpha", "starter", }, -- will enable running the teaser automatically for listed filetypes
+}
+```
 
 ## Features
 
@@ -51,23 +64,6 @@ Opens a new buffer showing today's events. In normal mode it can be closed with 
 
 Opens a popup with one randomly picked event for today's date. It disappears automatically after a few seconds.
 
-### Example configurations
-
-**Open the teaser every time Neovim is opened:**
-
-```lua
-{
-    "aPeoplesCalendar/apc.nvim",
-    dependencies = {
-        "rcarriga/nvim-notify",
-    },
-    event = "VeryLazy",
-    name = "apeoplescalendar",
-    config = function ()
-        require("apeoplescalendar").today_teaser()
-    end,
-}
-```
 ![showcase for teaser](https://user-images.githubusercontent.com/52743746/225929068-cae08eba-6ba5-4af2-953b-235a98dd1df0.png)
 
 ## Contribute
