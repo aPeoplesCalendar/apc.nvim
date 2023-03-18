@@ -39,11 +39,13 @@ This project is open source and the information contained in our event database 
 - Plugin [rcarriga/nvim-notify](https://github.com/rcarriga/nvim-notify)
 - curl
 
-## Usage
+## Features
 
 **`:APeoplesCalendar`**
 
 Opens a new buffer showing today's events. In normal mode it can be closed with key `q`.
+
+![showcase for detailed event view](https://user-images.githubusercontent.com/52743746/225929058-10c30fed-416b-4eca-8ec0-2cd126493487.png)
 
 **`:APeoplesCalendarTeaser`**
 
@@ -66,6 +68,7 @@ Opens a popup with one randomly picked event for today's date. It disappears aut
     end,
 }
 ```
+![showcase for teaser](https://user-images.githubusercontent.com/52743746/225929068-cae08eba-6ba5-4af2-953b-235a98dd1df0.png)
 
 ## Contribute
 
