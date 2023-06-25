@@ -1,24 +1,25 @@
-name: panvimdoc
+name: lemmy-help
 
 on: [push]
+
+env:
+  PLUGIN_NAME: apeoplescalendar
 
 jobs:
   docs:
     runs-on: ubuntu-latest
-    # TODO: if: ${{ github.ref == 'refs/heads/main' }}
+    name: emmylua to vimdoc
     steps:
-      - uses: actions/checkout@v3
-      - name: panvimdoc
-        uses: kdheepak/panvimdoc@main
-        with:
-          vimdoc: apc.nvim
-          version: "Neovim >= 0.8.0"
-          demojify: true
-          treesitter: true
-      - name: push changes
+      - uses: actions/checkout@v2
+
+      - name: Generating help
+        run: |
+          curl -Lq https://github.com/numToStr/lemmy-help/releases/latest/download/lemmy-help-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./lemmy-help lua/apeoplescalendar/* > doc/${{env.PLUGIN_NAME}}.txt
+
+      - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "chore(build): auto-generate vimdoc"
-          commit_user_name: "github-actions[bot]"
-          commit_user_email: "github-actions[bot]@users.noreply.github.com"
-          commit_author: "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          branch: ${{ github.head_ref }}
+          commit_message: "docs: auto-generate vimdoc"
+          file_pattern: doc/*.txt
