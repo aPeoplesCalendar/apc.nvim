@@ -15,7 +15,7 @@ jobs:
       - name: Generating help
         run: |
           curl -Lq https://github.com/numToStr/lemmy-help/releases/latest/download/lemmy-help-x86_64-unknown-linux-gnu.tar.gz | tar xz
-          ./lemmy-help lua/apeoplescalendar/* > doc/${{env.PLUGIN_NAME}}.txt
+          ./lemmy-help lua/apeoplescalendar/init.lua lua/apeoplescalendar/config.lua lua/apeoplescalendar/apeoplescalendar.lua > doc/${{env.PLUGIN_NAME}}.txt
 
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
