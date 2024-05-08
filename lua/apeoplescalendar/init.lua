@@ -11,7 +11,7 @@
 ---writing code for this plugin.
 ---@brief ]]
 
-local M = {}
+local C = {}
 
 ---@mod apeoplescalendar.usage Usage
 
@@ -19,22 +19,22 @@ local M = {}
 ---@param opts table @Configuration options
 ---@usage `require("apeoplescalendar").setup()`
 ---@usage `require("apeoplescalendar").setup({auto_teaser_filetypes = {"alpha", "dashboard", "starter"}})`
-function M.setup(opts)
+function C.setup(opts)
 	require("apeoplescalendar.config").setup(opts)
 end
 
 ---Shows all events of the day
 ---@param opts table @Configuration options
 ---@usage `require("apeoplescalendar").today()`
-function M.today(opts)
+function C.today(opts)
 	require("apeoplescalendar.apeoplescalendar").today()
 end
 
 ---Shows teaser for one random event of the day
 ---@param opts table @Configuration options
 ---@usage `require("apeoplescalendar").today_teaser()`
-function M.today_teaser()
+function C.today_teaser()
 	require("apeoplescalendar.apeoplescalendar").today_teaser()
 end
 
-return M
+return C
