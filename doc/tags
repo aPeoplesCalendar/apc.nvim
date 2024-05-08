@@ -1,0 +1,6 @@
+C.setup()	apc.txt	/*C.setup()*
+C.today()	apc.txt	/*C.today()*
+C.today_teaser()	apc.txt	/*C.today_teaser()*
+M	apc.txt	/*M*
+M.defaults	apc.txt	/*M.defaults*
+M.setup()	apc.txt	/*M.setup()*

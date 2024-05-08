@@ -1,85 +1,79 @@
 ==============================================================================
-Table of Contents                                    *apeoplescalendar.contents*
+------------------------------------------------------------------------------
+apeoplescalendar.intro Introduction
+[[
+People's Calendar (aPC) is a project that seeks to promote the worldwide
+of working class movements and liberation struggles in the form of a
+"On This Day" calendar.
 
-Introduction ·········································· |apeoplescalendar.intro|
-Usage ················································· |apeoplescalendar.usage|
-Configuration ········································ |apeoplescalendar.config|
+plugin is a neovim interface to the aPC database.
+can contribute to the project by adding events to the database, or by
+code for this plugin.
+]]
 
-==============================================================================
-Introduction                                            *apeoplescalendar.intro*
+------------------------------------------------------------------------------
+apeoplescalendar.usage Usage
 
-A People's Calendar (aPC) is a project that seeks to promote the worldwide
-history of working class movements and liberation struggles in the form of a
-searchable "On This Day" calendar.
+------------------------------------------------------------------------------
+                                                                     *C.setup()*
+                               `C.setup`({opts})
+up the plugin
+Parameters ~
+{opts} `(table)` @Configuration options
+Usage ~
+`require("apeoplescalendar").setup()`
+Usage ~
+`require("apeoplescalendar").setup({auto_teaser_filetypes = {"alpha", "dashboard", "starter"}})`
 
-This plugin is a neovim interface to the aPC database.
-You can contribute to the project by adding events to the database, or by
-writing code for this plugin.
+------------------------------------------------------------------------------
+                                                                     *C.today()*
+                               `C.today`({opts})
+all events of the day
+Parameters ~
+{opts} `(table)` @Configuration options
+Usage ~
+`require("apeoplescalendar").today()`
 
-==============================================================================
-Usage                                                   *apeoplescalendar.usage*
-
-M.setup()                                                              *M.setup*
-
-    Usage: ~
->lua
-        require("apeoplescalendar").setup({auto_teaser_filetypes = {"alpha", "dashboard", "starter"}})
-<
-
-
-M.today({opts})                                                        *M.today*
-    Shows all events of the day
-
-    Parameters: ~
-        {opts}  (table)  @Configuration options
-
-    Usage: ~
->lua
-        require("apeoplescalendar").today()
-<
-
-
-M.today_teaser({opts})                                          *M.today_teaser*
-    Shows teaser for one random event of the day
-
-    Parameters: ~
-        {opts}  (table)  @Configuration options
-
-    Usage: ~
->lua
-        require("apeoplescalendar").today_teaser()
-<
+------------------------------------------------------------------------------
+                                                              *C.today_teaser()*
+                               `C.today_teaser`()
+teaser for one random event of the day
+Parameters ~
+{opts} `(table)` @Configuration options
+Usage ~
+`require("apeoplescalendar").today_teaser()`
 
 
 ==============================================================================
-Configuration                                          *apeoplescalendar.config*
+------------------------------------------------------------------------------
+                                                                             *M*
+                                      `M`
+apeoplescalendar.config Configuration
 
-Config                                                                  *Config*
+------------------------------------------------------------------------------
+Class ~
+{Config}
+Fields ~
+{defaults} ConfigDefaults @Default configuration
 
-    Fields: ~
-        {defaults}  (ConfigDefaults)  @Default configuration
+------------------------------------------------------------------------------
+                                                                    *M.defaults*
+                                  `M.defaults`
+Class ~
+{ConfigDefaults}
+Fields ~
+{auto_teaser_filetypes} `(string[])` @List of filetypes to enable auto teaser for
 
+------------------------------------------------------------------------------
+                                                                     *M.setup()*
+                               `M.setup`({opts})
 
-ConfigDefaults                                                  *ConfigDefaults*
-
-    Fields: ~
-        {auto_teaser_filetypes}  (string[])  @List of filetypes to enable auto teaser for
-
-
-M.setup({opts})                                                        *M.setup*
-    @comment
-
-    Parameters: ~
-        {opts}  (Config)
-
-    Returns: ~
-        (nil)  @usage `require("apeoplescalendar.config").setup({auto_teaser_filetypes = {"alpha", "dashboard", "starter"}})
-
-
-M.today_teaser()                                                *M.today_teaser*
-
-
-M.today()                                                              *M.today*
+Parameters ~
+{opts} Config
+Return ~
+`(nil)`
+Usage ~
+`require("apeoplescalendar.config").setup({auto_teaser_filetypes = {"alpha", "dashboard", "starter"}})
 
 
-vim:tw=78:ts=8:noet:ft=help:norl:
+ vim:tw=78:ts=8:noet:ft=help:norl:
