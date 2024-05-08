@@ -1,10 +1,14 @@
-local M = {}
+local A = {}
 
+--- Generate a temporary file path
+---@return string
 local function generate_tmp_file_path()
    local path = os.getenv("TMPDIR") or os.getenv("TEMP") or os.getenv("TMP") or "/tmp"
    return path
 end
 
+--- Check if there is an internet connection
+---@return boolean
 local function test_internet_connection()
     local cmd = "ping -q -w 1 -c 1 `ip r | grep default | cut -d ' ' -f 3` > /dev/null && echo ok || echo error | grep \"ok\""
     local handle = io.popen(cmd)
@@ -29,6 +33,8 @@ local function command_capture(cmd, raw)
   return s
 end
 
+--- Fetches events from the APC database
+---@return table
 local function fetch_apc_events()
     local filename = generate_tmp_file_path() .. "/apeoplescalendar_".. os.date("%Y%m%d")
     local result = nil
@@ -49,6 +55,11 @@ local function fetch_apc_events()
     return result
 end
 
+--- Formats a string to a maximum width
+---@param s string The string to format
+---@param x integer The maximum width
+---@param indent integer The (optional) indentation to use
+---@return string
 local function format_up_to_x(s, x, indent)
     x = x or 79
     indent = indent or ""
@@ -69,6 +80,10 @@ local function format_up_to_x(s, x, indent)
     return indent .. table.concat(t, "\n" .. indent)
 end
 
+--- Converts a string to a table by linebreak
+---@param table table The table to add the lines to
+---@param plain string The string to convert
+---@return table The table with the lines added
 local function string_to_table_by_linebreak(table, plain)
     for s in plain:gmatch("[^\r\n]+") do
         table.insert(table, s)
@@ -76,12 +91,18 @@ local function string_to_table_by_linebreak(table, plain)
     return table
 end
 
+--- Converts a JSON string to a table
+---@param encoded string The JSON string to convert
+---@return table The table
 local function json_to_table(encoded)
     local json = require "json"
     local decoded = json.decode( encoded )
     return decoded
 end
 
+--- Converts a table to a reStructuredText string
+---@param events table The table to convert
+---@return string The reStructuredText string
 local function table_to_rst(events)
   local result = "================================\nA People's Calendar [" .. os.date("%Y-%m-%d") .. "] \n================================\n "
   result = result .. "\n  You can follow the A People's Calendar on https://www.apeoplescalendar.org/ \n  To help add an event to the aPC database or to submit a correction, go here:\n  https://docs.google.com/forms/d/e/1FAIpQLScWvVl15jwOMNyltSzl3elc_mEQzRqamlkKy0HpEvX3fYt_sA/viewform\n "
@@ -104,7 +125,8 @@ local function table_to_rst(events)
     return result
 end
 
-function M.today_teaser()
+--- Opens a teaser with notify
+function A.today_teaser()
     local events = {}
     local teaser = "No server connection..."
     if test_internet_connection() then
@@ -128,7 +150,8 @@ function M.today_teaser()
     })
 end
 
-function M.today()
+--- Opens the "today" buffer
+function A.today()
     local content = "No server connection...\nPress `q` to close."
     if test_internet_connection() then
         local fetched = fetch_apc_events()
@@ -174,4 +197,4 @@ function M.today()
     vim.api.nvim_win_set_option(win, 'wrap', true)
 end
 
-return M
+return A
