@@ -106,11 +106,16 @@ end
 
 function M.today_teaser()
     local events = {}
+    local teaser = "No server connection..."
     if test_internet_connection() then
-        events = vim.json.decode(fetch_apc_events())
+        ok, result_or_error = pcall(vim.json.decode, fetch_apc_events())
+        if ok then
+            events = result_or_error
+        else
+            teaser = "No events could be fetched for today..."
+        end
     end
     local event = events[ math.random( #events ) ]
-    local teaser = "No server connection..."
     if event ~= nil then
         teaser = event["otd"]
     end
@@ -127,11 +132,18 @@ function M.today()
     local content = "No server connection...\nPress `q` to close."
     if test_internet_connection() then
         local fetched = fetch_apc_events()
-        if fetched then
-            content = table_to_rst(vim.json.decode(fetched))
+
+        ok, result_or_error = pcall(vim.json.decode, fetch_apc_events())
+        if ok then
+            if fetched then
+                content = table_to_rst(result_or_error)
+            else
+                content = "No events found for today..."
+            end
         else
-            content = "No events found for today..."
+            content = "No events could be fetched for today..."
         end
+
     end
     local lines = {}
     for s in content:gmatch("[^\r\n]+") do
