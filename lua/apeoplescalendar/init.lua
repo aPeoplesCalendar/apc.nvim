@@ -1,7 +1,4 @@
----@toc apeoplescalendar.contents
-
----@mod apeoplescalendar.intro Introduction
----@brief [[
+---@text
 ---A People's Calendar (aPC) is a project that seeks to promote the worldwide
 ---history of working class movements and liberation struggles in the form of a
 ---searchable "On This Day" calendar.
@@ -9,32 +6,29 @@
 ---This plugin is a neovim interface to the aPC database.
 ---You can contribute to the project by adding events to the database, or by
 ---writing code for this plugin.
----@brief ]]
+---@text
 
-local C = {}
-
----@mod apeoplescalendar.usage Usage
+local M = {}
 
 ---Sets up the plugin
 ---@param opts table @Configuration options
 ---@usage `require("apeoplescalendar").setup()`
 ---@usage `require("apeoplescalendar").setup({auto_teaser_filetypes = {"alpha", "dashboard", "starter"}})`
-function C.setup(opts)
+function M.setup(opts)
 	require("apeoplescalendar.config").setup(opts)
 end
 
 ---Shows all events of the day
 ---@param opts table @Configuration options
 ---@usage `require("apeoplescalendar").today()`
-function C.today(opts)
+function M.today(opts)
 	require("apeoplescalendar.apeoplescalendar").today()
 end
 
 ---Shows teaser for one random event of the day
----@param opts table @Configuration options
 ---@usage `require("apeoplescalendar").today_teaser()`
-function C.today_teaser()
+function M.today_teaser()
 	require("apeoplescalendar.apeoplescalendar").today_teaser()
 end
 
-return C
+return M
